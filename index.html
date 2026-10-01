@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c35">
+  <title>ختمة بابا | ختمتان يوميًا إهداءً لروحه</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="home-view" class="spa-view">
+  <header class="hero">
+    <div class="hero-pattern" aria-hidden="true"></div>
+    <nav class="topbar"><a class="brand" href="#home" aria-label="ختمة بابا، الصفحة الرئيسية"><span class="brand-mark">۞</span><span>ختمة بابا</span></a><div class="topbar-actions"><div class="mode-switch" role="group" aria-label="اختيار الوضع"><button type="button" data-mode="participant" class="mode-button active">وضع المشارك</button><button type="button" data-mode="admin" class="mode-button">الإدارة</button></div><a class="history-nav-link" href="#history">سجل الختمات</a><button type="button" class="history-nav-link auth-button">تسجيل الدخول</button><span class="today" id="today"></span></div></nav>
+    <section class="hero-copy" id="home">
+      <span class="eyebrow">مَجْلِسُ قُرْآنٍ وَدُعَاء</span>
+      <h1>ختمة على روح أبي<br><em>رحمه الله 🤍</em></h1>
+      <p class="hero-prayer">اللهم اجعل القرآن نورًا له وشفيعًا له</p>
+      <a class="hero-link" href="#dashboard">تابع ورد اليوم <span>↓</span></a>
+    </section>
+    <div class="hero-ornament" aria-hidden="true">۞</div>
+  </header>
+
+  <div class="sync-status" role="status" aria-live="polite" hidden></div>
+
+  <nav id="admin-sidebar" class="admin-sidebar" aria-label="تنقل الإدارة" hidden>
+    <a href="#admin-dashboard">نظرة عامة</a><a href="#khatmas">ختمتا اليوم</a><a href="#participants-section">المشاركون</a><a href="#history">السجل والتاريخ</a>
+  </nav>
+
+  <main>
+    <section class="section admin-dashboard" id="admin-dashboard" hidden aria-labelledby="admin-dashboard-title">
+      <div class="admin-dashboard-heading"><div><span class="section-kicker">إدارة الختمتين</span><h2 id="admin-dashboard-title">لوحة تحكم ختمة أبي رحمه الله 🤍</h2></div><time id="admin-dashboard-date" class="dashboard-date"></time></div>
+      <div id="admin-dashboard-stats" class="admin-dashboard-stats"></div>
+      <div class="admin-quick-actions"><button type="button" id="generate-both-khatmas" class="submit-button">توزيع أجزاء اليوم</button><a class="secondary-button" href="#khatmas">عرض الختمتين</a><a class="secondary-button" href="#participants-section">إدارة المشاركين</a></div>
+      <section class="admin-audit-card"><div><span class="section-kicker">سجل الإدارة</span><h3>آخر الإجراءات الحساسة</h3></div><div id="admin-audit-list" class="admin-audit-list"></div></section>
+    </section>
+
+    <section class="section participant-dashboard" id="participant-dashboard" hidden aria-labelledby="participant-dashboard-title">
+      <div class="participant-dashboard-heading"><div><span class="section-kicker">وردك اليوم</span><h2 id="participant-dashboard-title">مساحتي القرآنية</h2></div><span class="dashboard-date" id="participant-dashboard-date"></span></div>
+      <div class="participant-dashboard-content" id="participant-dashboard-content"></div>
+    </section>
+
+    <section class="section dashboard-section" id="dashboard" aria-label="إحصاءات الختمات">
+      <div class="section-heading"><div><span class="section-kicker">ملخص اليوم</span><h2>على درب الوفاء</h2></div><span class="dashboard-date" id="dashboard-date"></span></div>
+      <div class="dashboard-stats" id="dashboard-stats"></div>
+    </section>
+
+    <section class="section participant-self-section" id="participant-self-service">
+      <div class="section-heading"><div><span class="section-kicker">وردك الشخصي</span><h2>مساحتي القرآنية</h2></div><span class="self-cycle-badge" id="self-cycle-badge"></span></div>
+      <form id="profile-form" class="profile-card"><div><span class="section-kicker">حسابي</span><strong id="profile-email"></strong><span id="profile-role" class="profile-role"></span></div><label>الاسم الظاهر<input id="profile-display-name" maxlength="80" required></label><button class="secondary-button" type="submit">حفظ بياناتي</button><p id="profile-message" class="form-note" role="status"></p></form>
+      <form id="assignment-request-form" class="assignment-request-form" hidden><div><strong>عدد الأجزاء المطلوبة اليوم</strong><span>حدد حدك الأقصى لهذه الختمة؛ القيمة الافتراضية ٣٠ عند عدم تحديد طلب.</span></div><label>الختمة<select name="khatmaId"><option value="khatma-1">الختمة الأولى</option><option value="khatma-2">الختمة الثانية</option></select></label><label>العدد<input name="count" type="number" min="0" max="30" step="1" value="30" required></label><button class="secondary-button" type="submit">حفظ طلبي</button></form>
+      <label class="self-select-label" for="self-participant-select">اختر ملفك</label>
+      <select id="self-participant-select" class="history-select"></select>
+      <div id="self-participant-content" class="self-participant-content"></div>
+    </section>
+
+    <section class="section khatma-section" id="khatmas">
+      <div class="section-heading"><div><span class="section-kicker">وردنا اليومي</span><h2>الختمتان</h2></div><p>اختر ختمة لمتابعة أجزائها الثلاثين<br>وتعيين القارئ لكل جزء.</p></div>
+      <div class="daily-date-control"><label for="daily-date-select">عرض يوم الختمة</label><select id="daily-date-select" class="history-select" aria-label="اختر تاريخ الختمة اليومية"></select><span id="daily-archive-label" class="archive-badge" hidden>سجل مؤرشف</span></div>
+      <div class="khatma-tabs" id="khatma-tabs" role="tablist" aria-label="اختيار الختمة"></div>
+      <div id="khatma-board" class="khatma-board" role="tabpanel" aria-live="polite"></div>
+    </section>
+
+    <section class="section join-section" id="join">
+      <div class="join-intro"><span class="section-kicker">كن شريكًا في الأجر</span><h2>اختر وردك اليومي</h2><p>اختر إحدى الختمتين والجزء الذي ستقرؤه من خلال حسابك المرتبط بملف مشارك.</p><div class="duaa">يُمنع تكرار الجزء نفسه على المشارك عبر الختمتين خلال دورته الشخصية.</div></div>
+      <form class="join-form" id="participation-form">
+        <label>اسم المشارك<input name="name" type="text" maxlength="40" placeholder="اكتب اسمك" autocomplete="name" required></label>
+        <label>الختمة<select name="khatmaId" required><option value="khatma-1">الختمة الأولى</option><option value="khatma-2">الختمة الثانية</option></select></label>
+        <label>الجزء<select name="juz" required id="juz-select"></select></label>
+        <button class="submit-button" type="submit">تسجيل الورد <span>←</span></button>
+        <p class="form-note" id="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <section class="section participants-section" id="participants-section">
+      <div class="section-heading"><div><span class="section-kicker">إدارة الملفات</span><h2>المشاركون</h2></div><span class="participants-count" id="participants-count"></span></div>
+      <p class="admin-disclaimer">الأرقام السرية لا تُحفظ كنص ظاهر، وتُعرض للمشرف مرة واحدة عند الإنشاء أو التجديد.</p>
+      <form class="add-participant-form" id="add-participant-form"><label for="new-participant-name">إضافة مشارك</label><input id="new-participant-name" name="name" type="text" maxlength="40" placeholder="اسم المشارك" required><button class="submit-button" type="submit">إضافة المشارك <span>＋</span></button><p class="form-note" id="participant-form-message" role="status"></p></form>
+      <div id="participants-list" class="participants-list"></div>
+    </section>
+  </main>
+  <footer><span class="footer-mark">۞</span><p>اللهم ارحم أبي واغفر له، وارفع درجته في المهديين.</p><span>صدقة جارية عن روح والدنا</span></footer>
+  </div>
+
+  <dialog id="participant-details-dialog" class="participant-details-dialog">
+    <div class="participant-details-content"><div class="participant-details-heading"><div><span class="section-kicker">ملف القارئ</span><h2 id="participant-details-name"></h2></div><button type="button" class="dialog-cancel" id="participant-details-close">إغلاق</button></div><div id="participant-details-body"></div></div>
+  </dialog>
+
+  <div id="history" class="spa-view" hidden>
+    <header class="history-hero">
+      <nav class="topbar"><a class="brand" href="#home"><span class="brand-mark">۞</span><span>ختمة بابا</span></a><div class="topbar-actions"><div class="mode-switch" role="group" aria-label="اختيار الوضع"><button type="button" data-mode="participant" class="mode-button active">وضع المشارك</button><button type="button" data-mode="admin" class="mode-button">الإدارة</button></div><a class="history-nav-link" href="#home">العودة إلى الختمات <span aria-hidden="true">←</span></a><button type="button" class="history-nav-link auth-button">تسجيل الدخول</button></div></nav>
+      <div class="history-hero-copy"><span class="eyebrow">حِفْظُ الوِرْدِ وَالأَثَر</span><h1>سجل الختمات</h1><p>كل قراءة محفوظة، وكل دورة مكتملة باقية في سجل الوفاء.</p></div>
+    </header>
+    <div class="sync-status" role="status" aria-live="polite" hidden></div>
+    <main>
+      <section class="section history-section"><div class="section-heading"><div><span class="section-kicker">السجل الكامل</span><h2>إسنادات وإكمالات الختمتين</h2></div><span id="history-today-date" class="dashboard-date"></span></div><div id="today-history" class="history-events"></div></section>
+      <section class="section history-section"><div class="section-heading"><div><span class="section-kicker">الأيام الماضية</span><h2>السجل اليومي</h2></div></div><div id="previous-history" class="history-days"></div></section>
+      <section class="section history-section"><div class="section-heading"><div><span class="section-kicker">رحلة القارئ</span><h2>سجل المشارك</h2></div></div><div id="admin-history-filters" class="admin-history-filters" hidden><div id="history-participant-filter"><label for="participant-history-select">المشارك</label><select id="participant-history-select" class="history-select"></select></div><label>التاريخ<input id="history-date-filter" type="date"></label><label>الختمة<select id="history-khatma-filter" class="history-select"><option value="">كل الختمات</option><option value="khatma-1">الختمة الأولى</option><option value="khatma-2">الختمة الثانية</option></select></label><label>الحالة<select id="history-status-filter" class="history-select"><option value="">كل الحالات</option><option value="assigned">مخصص</option><option value="completed">تمت القراءة</option><option value="expired">انتهى اليوم ولم تتم القراءة</option></select></label><label>الدورة<select id="history-cycle-filter" class="history-select"><option value="">كل الدورات</option></select></label><button type="button" id="clear-history-filters" class="secondary-button">مسح الفلاتر</button></div><div id="participant-history" class="participant-timeline"></div></section>
+      <section class="section history-section completed-cycles-section"><div class="section-heading"><div><span class="section-kicker">ثمرة المواظبة</span><h2>الدورات المكتملة</h2></div><span id="completed-cycles-count" class="dashboard-date"></span></div><div id="completed-cycles" class="completed-cycles"></div></section>
+    </main>
+    <footer><span class="footer-mark">۞</span><p>اللهم ارحم أبي واغفر له، وارفع درجته في المهديين.</p><span>صدقة جارية عن روح والدنا</span></footer>
+  </div>
+  <dialog id="auth-dialog" class="admin-pin-dialog">
+    <form id="auth-form">
+      <span class="section-kicker">ختمة على روح أبي رحمه الله 🤍</span><h2 id="auth-title">اكتب بيانات الدخول</h2>
+      <p id="auth-description">اكتب اسمك والرقم السري المكوّن من أربعة أرقام.</p>
+      <div id="participant-login-fields" class="auth-fields">
+        <label>الاسم<input id="auth-name" type="text" maxlength="80" placeholder="أحمد" autocomplete="name" required></label>
+        <label>الرقم السري<input id="auth-pin" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" placeholder="••••" autocomplete="one-time-code" required></label>
+      </div>
+      <div id="admin-login-fields" class="auth-fields" hidden>
+        <label>البريد الإلكتروني<input id="auth-email" type="email" autocomplete="username" disabled></label>
+        <label>كلمة المرور<input id="auth-password" type="password" autocomplete="current-password" disabled></label>
+      </div>
+      <p id="auth-error" class="form-note error" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="dialog-cancel" id="auth-switch">دخول الإدارة</button><button type="submit" class="submit-button" id="auth-submit">دخول</button></div>
+    </form>
+  </dialog>
+  <dialog id="pin-reveal-dialog" class="admin-pin-dialog pin-reveal-dialog">
+    <div class="pin-reveal-content"><span class="section-kicker">بيانات دخول المشارك</span><h2>دوّن الرقم السري</h2><p id="pin-reveal-name"></p><strong id="pin-reveal-value" dir="ltr"></strong><p class="pin-warning">يظهر هذا الرقم الآن فقط. أوصله للمشارك بطريقة خاصة؛ لا ترسله في مجموعة عامة.</p><button type="button" class="submit-button" id="pin-reveal-close">تم، حفظت الرقم</button></div>
+  </dialog>
+  <div id="app-toast" class="app-toast" role="status" aria-live="polite" hidden></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js?v=20260930-3"></script>
+  <script src="js/data.js?v=20261001-6"></script>
+  <script src="js/auth.js?v=20260930-3"></script>
+  <script src="js/app.js?v=20261001-8"></script>
+  <script src="js/history.js?v=20260930-3"></script>
+</body>
+</html>
